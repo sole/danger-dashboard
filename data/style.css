@@ -1,0 +1,14 @@
+/*
+Inspired by Dr. Jenn Schiffer
+https://twitter.com/jennschiffer/status/402822075317878784
+*/
+element {
+	--to-the-fucking-moon: 100000;
+}
+
+#danger-dashboard {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	z-index: var(--to-the-fucking-moon);
+}
