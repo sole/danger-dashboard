@@ -3,7 +3,7 @@ Inspired by Dr. Jenn Schiffer
 https://twitter.com/jennschiffer/status/402822075317878784
 */
 element {
-	--to-the-fucking-moon: 100000;
+	--to-the-fucking-moon: 1000000;
 }
 
 #danger-dashboard {
@@ -11,4 +11,11 @@ element {
 	bottom: 0;
 	right: 0;
 	z-index: var(--to-the-fucking-moon);
+	padding: 1rem;
+	color: #000;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px 0 0;
+    border-width: 1px 0px 0 1px;
+    box-shadow: 0px 0px 20px #000;
 }
