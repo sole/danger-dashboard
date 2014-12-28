@@ -1,37 +1,34 @@
 // This script will be run each time a page is loaded
 
 var div = document.createElement('div');
-div.innerHTML = 'danger dashboard';
 div.id = 'danger-dashboard';
 
 document.body.appendChild(div);
 
-// what IS available?
-// custom elements (document.registerElement)
-// html imports (link rel=import)
-// shadow dom (document.createShadowRoot)
-// HTML templates
-// color code: orange = polyfilled, red = no, green = native (also add some pattern / letter for colorblind devs!)
 WebComponentsSupport(function(results) {
 
-	var feats = [];
+	var list = document.createElement('ul');
 	var keys = Object.keys(results);
 	keys.forEach(function(k) {
+		var li = document.createElement('li');
 		var v = results[k];
-		var availability = v.available ? 'Y' : 'N';
+		
 		var nativeness = '';
 		if(v.available) {
 			if(v.implementation === 'native') {
-				nativeness = 'N';
+				li.classList.add('native');
 			} else {
-				nativeness = 'P';
+				li.classList.add('polyfill');
 			}
-			nativeness = ' (' + nativeness + ')';
+		} else {
+			li.classList.add('unsupported');
 		}
-		feats.push(k + ': ' + availability + nativeness );
+
+		li.innerHTML = k;
+		list.appendChild(li);
 	});
 
-	div.innerHTML = feats.join(' / ');
+	div.appendChild(list);
 
 });
 
