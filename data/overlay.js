@@ -18,6 +18,7 @@ function refreshDisplay(nativeEnabled) {
 	// own add-on context window which is not actually the one web code
 	// runs on
 	// See https://developer.mozilla.org/Add-ons/SDK/Guides/Content_Scripts/Interacting_with_page_scripts#Access_objects_defined_by_page_scripts
+	
 	WebComponentsSupport(unsafeWindow, function(results) {
 		displayResults(results, nativeEnabled);
 	});
@@ -48,7 +49,7 @@ function displayResults(results, nativeEnabled) {
 
 	var label = document.createElement('label');
 	label.appendChild(toggler);
-	label.appendChild(document.createTextNode('dom.webcomponents.enabled = ' + nativeEnabled));
+	label.appendChild(document.createTextNode(' dom.webcomponents.enabled = ' + nativeEnabled));
 	div.appendChild(label);
 
 	
