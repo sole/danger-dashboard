@@ -31,7 +31,9 @@ function setWCEnabled(newValue) {
 
 function displayResults(results, nativeEnabled) {
 	
-	div.innerHTML = '';
+	while(div.childNodes.length > 0) {
+		div.removeChild(div.lastChild);
+	}
 	
 
 	var toggler = document.createElement('input');
@@ -70,7 +72,7 @@ function displayResults(results, nativeEnabled) {
 			li.classList.add('unsupported');
 		}
 
-		li.innerHTML = k;
+		li.appendChild(document.createTextNode(k));
 		list.appendChild(li);
 	});
 
