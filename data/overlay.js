@@ -2,11 +2,18 @@
 
 var div = document.createElement('div');
 div.id = 'danger-dashboard';
+div.innerHTML = '';
 
 document.body.appendChild(div);
 
-WebComponentsSupport(function(results) {
+// Using unsafeWindow because otherwise we'll be inspecting *our*
+// own add-on context window which is not actually the one web code
+// runs on
+// See https://developer.mozilla.org/Add-ons/SDK/Guides/Content_Scripts/Interacting_with_page_scripts#Access_objects_defined_by_page_scripts
+WebComponentsSupport(unsafeWindow, displayResults);
 
+function displayResults(results) {
+	
 	var list = document.createElement('ul');
 	var keys = Object.keys(results);
 	keys.forEach(function(k) {
@@ -29,6 +36,5 @@ WebComponentsSupport(function(results) {
 	});
 
 	div.appendChild(list);
-
-});
+}
 

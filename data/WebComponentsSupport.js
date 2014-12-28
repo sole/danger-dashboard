@@ -1,16 +1,18 @@
 (function() {
 
-	function detectSupport(doneCallback) {
+	function detectSupport(_window, doneCallback) {
+
+		var doc = _window.document;
 
 		// custom elements -> registerElement
-		var regElemAvailable = !!document.registerElement;
+		var regElemAvailable = !!doc.registerElement;
 		var regElemNative = false;
 		if(regElemAvailable) {
-			regElemNative = isNativeCode(document.registerElement);
+			regElemNative = isNativeCode(doc.registerElement);
 		}
 
 		// shadowDom -> createShadowRoot
-		var dummyDiv = document.createElement('div');
+		var dummyDiv = doc.createElement('div');
 		var shadowRootAvailable = !!dummyDiv.createShadowRoot;
 		var shadowRootNative = false;
 		if(shadowRootAvailable) {
@@ -18,18 +20,18 @@
 		}
 
 		// html templates
-		var dummyTemplate = document.createElement('template');
+		var dummyTemplate = doc.createElement('template');
 		var templatesAvailable = !!(dummyTemplate.content);
 
 		// html imports
 		var IMPORT_LINK_TYPE = 'import';
-		var importsMaybeAvailable = Boolean(IMPORT_LINK_TYPE in document.createElement('link'));
+		var importsMaybeAvailable = Boolean(IMPORT_LINK_TYPE in doc.createElement('link'));
 		var importsAvailable = false;
 		var detectionTimeout = null;
 
 		// Let's run a quick test and see if imports are actually loading anything at all.
 		if(importsMaybeAvailable) {
-			var dummyLink = document.createElement('link');
+			var dummyLink = doc.createElement('link');
 
 			var testStr = 'Supercalifragilisticexpialidocious';
 			var testBlob = new Blob([testStr], { type: 'text/html' });
@@ -43,27 +45,23 @@
 				}
 
 				// Always clean up after yourself!
-				removeDummyLink();
+				doc.head.removeChild(dummyLink);
 
 				completeDetection();
 			};
 			dummyLink.href = URL.createObjectURL(testBlob);
 			
 			// apparently doesn't start loading until appended to <head>
-			document.head.appendChild(dummyLink);
+			doc.head.appendChild(dummyLink);
 
 			// Give it some time for browsers that won't load anything actually,
 			// so we can complete the test
-			detectionTimeout = window.setTimeout(completeDetection, 25);
+			detectionTimeout = setTimeout(completeDetection, 25);
 		} else {
 			// No, not available at all!
 			completeDetection();
 		}
 
-		function removeDummyLink() {
-			document.head.removeChild(dummyLink);
-		}
-		
 		function completeDetection() {
 			
 			if(detectionTimeout) {
