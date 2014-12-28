@@ -23,6 +23,10 @@ element {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+#danger-dashboard label {
+	text-transform: none;
+}
+
 #danger-dashboard ul {
 	list-style-position: inside;
 	list-style-type: none;

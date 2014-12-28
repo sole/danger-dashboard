@@ -5,7 +5,6 @@ div.id = 'danger-dashboard';
 document.body.appendChild(div);
 
 self.port.on('updateWCEnabled', function(currentValue) {
-	console.log('got update, enabled = ' + currentValue);
 	refreshDisplay(currentValue);
 });
 
@@ -25,10 +24,34 @@ function refreshDisplay(nativeEnabled) {
 
 }
 
+function setWCEnabled(newValue) {
+	self.port.emit('setWCEnabled', newValue);
+}
+
 function displayResults(results, nativeEnabled) {
 	
-	div.innerHTML = '<tt>dom.webcomponents.enabled = ' + nativeEnabled + '</tt>';
+	div.innerHTML = '';
+	
 
+	var toggler = document.createElement('input');
+	toggler.type = 'checkbox';
+	
+	if(nativeEnabled) {
+		toggler.setAttribute('checked', 'checked');
+	}
+
+	toggler.addEventListener('change', function() {
+		var checked = toggler.checked;
+		setWCEnabled(checked);
+	});
+	
+
+	var label = document.createElement('label');
+	label.appendChild(toggler);
+	label.appendChild(document.createTextNode('dom.webcomponents.enabled = ' + nativeEnabled));
+	div.appendChild(label);
+
+	
 	var list = document.createElement('ul');
 	var keys = Object.keys(results);
 	keys.forEach(function(k) {
