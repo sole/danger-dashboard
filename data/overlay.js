@@ -2,18 +2,33 @@
 
 var div = document.createElement('div');
 div.id = 'danger-dashboard';
-div.innerHTML = '';
-
 document.body.appendChild(div);
 
-// Using unsafeWindow because otherwise we'll be inspecting *our*
-// own add-on context window which is not actually the one web code
-// runs on
-// See https://developer.mozilla.org/Add-ons/SDK/Guides/Content_Scripts/Interacting_with_page_scripts#Access_objects_defined_by_page_scripts
-WebComponentsSupport(unsafeWindow, displayResults);
+self.port.on('updateWCEnabled', function(currentValue) {
+	console.log('got update, enabled = ' + currentValue);
+	refreshDisplay(currentValue);
+});
 
-function displayResults(results) {
+self.port.emit('getWCEnabled');
+
+//
+
+function refreshDisplay(nativeEnabled) {
+
+	// Using unsafeWindow because otherwise we'll be inspecting *our*
+	// own add-on context window which is not actually the one web code
+	// runs on
+	// See https://developer.mozilla.org/Add-ons/SDK/Guides/Content_Scripts/Interacting_with_page_scripts#Access_objects_defined_by_page_scripts
+	WebComponentsSupport(unsafeWindow, function(results) {
+		displayResults(results, nativeEnabled);
+	});
+
+}
+
+function displayResults(results, nativeEnabled) {
 	
+	div.innerHTML = '<tt>dom.webcomponents.enabled = ' + nativeEnabled + '</tt>';
+
 	var list = document.createElement('ul');
 	var keys = Object.keys(results);
 	keys.forEach(function(k) {
@@ -36,5 +51,6 @@ function displayResults(results) {
 	});
 
 	div.appendChild(list);
+
 }
 
