@@ -1,9 +1,10 @@
 {
-  "name": "danger-dashboard-fake",
-  "title": "danger-dashboard-fake",
+  "name": "danger-dashboard",
+  "title": "Danger Dashboard",
+  "homepage": "https://github.com/sole/danger-dashboard",
   "id": "jid1-8ceFQhGRJXgsXQ",
-  "description": "a basic add-on",
-  "author": "",
-  "license": "MPL 2.0",
-  "version": "0.1"
+  "description": "Display a dashboard with info about Web Components support",
+  "author": "Soledad Penadés",
+  "license": "Apache 2.0",
+  "version": "1.0"
 }
