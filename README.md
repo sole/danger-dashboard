@@ -1,6 +1,8 @@
 # Danger Dashboard
 > A Firefox add-on
 
+Install [a stable build](https://addons.mozilla.org/en-US/firefox/addon/danger-dashboard/).
+
 You've been messing with `about:config` and `dom.webcomponents.enabled` but you don't remember it anymore. Suddenly you visit a website that uses Web Components and nothing works the way you expect it-you need HELP!
 
 This add-on renders a little dashboard on the bottom right corner on each page load, displaying the available support for each of the four APIs that are used to build Web Components: Custom elements, Shadow DOM, HTML templates and HTML Imports:
