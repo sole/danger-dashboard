@@ -5,7 +5,7 @@ You've been messing with `about:config` and `dom.webcomponents.enabled` but you 
 
 This add-on renders a little dashboard on the bottom right corner on each page load, displaying the available support for each of the four APIs that are used to build Web Components: Custom elements, Shadow DOM, HTML templates and HTML Imports:
 
-![Screenshot](_images/screenshot.png)]
+![Screenshot](_images/screenshot.png)
 
 ## Using
 
@@ -27,4 +27,4 @@ If you want to help fix an specific issue but are not entirely familiar with cod
 
 ## License
 
-© Soledad Penadés, licensed under the Apache 2.0 License.
+© 2014 Soledad Penadés, licensed under the Apache 2.0 License.
